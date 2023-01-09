@@ -1103,7 +1103,7 @@ class _AboutState extends State<_About> {
           child: SingleChildScrollView(
             controller: scrollController,
             physics: NeverScrollableScrollPhysics(),
-            child: _Card(title: 'About RustDesk', children: [
+            child: _Card(title: 'About GerarDesk', children: [
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -1114,7 +1114,7 @@ class _AboutState extends State<_About> {
                   Text('Build Date: $buildDate').marginSymmetric(vertical: 4.0),
                   InkWell(
                       onTap: () {
-                        launchUrlString('https://rustdesk.com/privacy');
+                        launchUrlString(' ');
                       },
                       child: const Text(
                         'Privacy Statement',
@@ -1122,7 +1122,7 @@ class _AboutState extends State<_About> {
                       ).marginSymmetric(vertical: 4.0)),
                   InkWell(
                       onTap: () {
-                        launchUrlString('https://rustdesk.com');
+                        launchUrlString('  ');
                       },
                       child: const Text(
                         'Website',
