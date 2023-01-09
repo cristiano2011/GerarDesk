@@ -118,12 +118,12 @@ GerarDesk understøtter ikke Wayland. Tjek [dette](https://docs.fedoraproject.or
 
 ## Wayland-support
 
-Wayland ser ikke ud til at levere nogen API til at sende tastetryk til andre vinduer. Derfor bruger rustdesk et API fra et lavere niveau, nemlig `/dev/uinput`-enheden (Linux-kerneniveau).
+Wayland ser ikke ud til at levere nogen API til at sende tastetryk til andre vinduer. Derfor bruger gerardesk et API fra et lavere niveau, nemlig `/dev/uinput`-enheden (Linux-kerneniveau).
 
 Når wayland er den kontrollerede side, skal du starte på følgende måde:
 ```bash
 # Start uinput service
-$ sudo rustdesk --service
+$ sudo gerardesk --service
 $ rustdesk
 ```
 **Bemærk**: Wayland-skærmoptagelse bruger forskellige grænseflader. GerarDesk understøtter i øjeblikket kun org.freedesktop.portal.ScreenCast.

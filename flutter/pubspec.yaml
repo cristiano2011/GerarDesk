@@ -86,7 +86,7 @@ dependencies:
         # currently, we use flutter 3.0.5 for windows build, latest for other builds.
         #
         # for flutter 3.0.5, please use official version(just comment code below).
-        # if build rustdesk by flutter >=3.3, please use our custom pub below (uncomment code below).
+        # if build gerardesk by flutter >=3.3, please use our custom pub below (uncomment code below).
         # git:
         #     url: https://github.com/Kingtous/flutter_improved_scrolling
         #     ref: 62f09545149f320616467c306c8c5f71714a18e6

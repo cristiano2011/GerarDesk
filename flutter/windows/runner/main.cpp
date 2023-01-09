@@ -45,14 +45,14 @@ int APIENTRY wWinMain(_In_ HINSTANCE instance, _In_opt_ HINSTANCE prev,
   char** c_args = rustdesk_core_main(&args_len);
   if (!c_args)
   {
-    std::cout << "Rustdesk core returns false, exiting without launching Flutter app" << std::endl;
+    std::cout << "Gerardesk core returns false, exiting without launching Flutter app" << std::endl;
     return EXIT_SUCCESS;
   }
   std::vector<std::string> rust_args(c_args, c_args + args_len);
   free_c_args(c_args, args_len);
 
   // uni links dispatch
-  // only do uni links when dispatch a rustdesk links
+  // only do uni links when dispatch a gerardesk links
   auto prefix = std::string(uniLinksPrefix);
   if (!command_line_arguments.empty() && command_line_arguments.front().compare(0, prefix.size(), prefix.c_str()) == 0) {
      HWND hwnd = ::FindWindow(_T("FLUTTER_RUNNER_WIN32_WINDOW"), _T("GerarDesk"));

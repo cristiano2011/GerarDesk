@@ -125,7 +125,7 @@ GerarDesk 暂时不支持 Wayland，不过正在积极开发中。
 
 ```sh
 git clone https://github.com/rustdesk/rustdesk # 克隆Github存储库
-cd rustdesk # 进入文件夹
+cd gerardesk # 进入文件夹
 docker build -t "rustdesk-builder" . # 构建容器
 ```
 请注意：

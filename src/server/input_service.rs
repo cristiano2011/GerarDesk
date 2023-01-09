@@ -604,7 +604,7 @@ pub async fn lock_screen() {
     cfg_if::cfg_if! {
     if #[cfg(target_os = "linux")] {
         // xdg_screensaver lock not work on Linux from our service somehow
-        // loginctl lock-session also not work, they both work run rustdesk from cmd
+        // loginctl lock-session also not work, they both work run gerardesk from cmd
         std::thread::spawn(|| {
             let mut key_event = KeyEvent::new();
 

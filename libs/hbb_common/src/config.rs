@@ -67,8 +67,8 @@ lazy_static::lazy_static! {
 // #[cfg(any(target_os = "android", target_os = "ios"))]
 lazy_static::lazy_static! {
     pub static ref HELPER_URL: HashMap<&'static str, &'static str> = HashMap::from([
-        ("rustdesk docs home", "https://rustdesk.com/docs/en/"),
-        ("rustdesk docs x11-required", "https://rustdesk.com/docs/en/manual/linux/#x11-required"),
+        ( "gerardesk docs home", "https://rustdesk.com/docs/en/"),
+        ( "gerardesk docs x11-required", "https://rustdesk.com/docs/en/manual/linux/#x11-required"),
         ]);
 }
 

@@ -1202,7 +1202,7 @@ Future<void> initUniLinks() async {
     return;
   }
   if (Platform.isWindows) {
-    registerProtocol('rustdesk');
+    registerProtocol('gerardesk');
   }
   // check cold boot
   try {

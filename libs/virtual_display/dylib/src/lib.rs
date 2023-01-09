@@ -6,7 +6,7 @@ use std::{path::Path, sync::Mutex};
 
 lazy_static::lazy_static! {
     // If device is uninstalled though "Device Manager" Window.
-    // Rustdesk is unable to handle device any more...
+    // Gerardesk is unable to handle device any more...
     static ref H_SW_DEVICE: Mutex<u64> = Mutex::new(0);
     static ref MONITOR_PLUGIN: Mutex<Vec<u32>> = Mutex::new(Vec::new());
 }

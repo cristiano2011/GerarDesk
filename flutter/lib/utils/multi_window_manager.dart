@@ -57,7 +57,7 @@ class RustDeskMultiWindowManager {
       remoteDesktopController
         ..setFrame(const Offset(0, 0) & const Size(1280, 720))
         ..center()
-        ..setTitle("rustdesk - remote desktop")
+        ..setTitle("gerardesk - remote desktop")
         ..show();
       registerActiveWindow(remoteDesktopController.windowId);
       _remoteDesktopWindowId = remoteDesktopController.windowId;
@@ -83,7 +83,7 @@ class RustDeskMultiWindowManager {
       fileTransferController
         ..setFrame(const Offset(0, 0) & const Size(1280, 720))
         ..center()
-        ..setTitle("rustdesk - file transfer")
+        ..setTitle("gerardesk - file transfer")
         ..show();
       registerActiveWindow(fileTransferController.windowId);
       _fileTransferWindowId = fileTransferController.windowId;
@@ -109,7 +109,7 @@ class RustDeskMultiWindowManager {
       portForwardController
         ..setFrame(const Offset(0, 0) & const Size(1280, 720))
         ..center()
-        ..setTitle("rustdesk - port forward")
+        ..setTitle("gerardesk - port forward")
         ..show();
       registerActiveWindow(portForwardController.windowId);
       _portForwardWindowId = portForwardController.windowId;
@@ -207,7 +207,7 @@ class RustDeskMultiWindowManager {
   }
 
   /// Remove active window which has [`windowId`]
-  /// 
+  ///
   /// [Avaliability]
   /// This function should only be called from main window.
   /// For other windows, please post a unregister(hide) event to main window handler:

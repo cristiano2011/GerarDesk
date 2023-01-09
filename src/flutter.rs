@@ -28,7 +28,7 @@ lazy_static::lazy_static! {
     pub static ref GLOBAL_EVENT_STREAM: RwLock<HashMap<String, StreamSink<String>>> = Default::default(); // rust to dart event channel
 }
 
-/// FFI for rustdesk core's main entry.
+/// FFI for gerardesk core's main entry.
 /// Return true if the app should continue running with UI(possibly Flutter), false if the app should exit.
 #[cfg(not(windows))]
 #[no_mangle]

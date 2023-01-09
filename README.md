@@ -134,12 +134,12 @@ GerarDesk does not support Wayland. Check [this](https://docs.fedoraproject.org/
 
 ## Wayland support
 
-Wayland does not seem to provide any API for sending keypresses to other windows. Therefore, the rustdesk uses an API from a lower level, namely the `/dev/uinput` device (Linux kernel level).
+Wayland does not seem to provide any API for sending keypresses to other windows. Therefore, the gerardesk uses an API from a lower level, namely the `/dev/uinput` device (Linux kernel level).
 
 When wayland is the controlled side, you have to start in the following way:
 ```bash
 # Start uinput service
-$ sudo rustdesk --service
+$ sudo gerardesk --service
 $ rustdesk
 ```
 **Notice**: Wayland screen recording uses different interfaces. GerarDesk currently only supports org.freedesktop.portal.ScreenCast.

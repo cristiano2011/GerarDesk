@@ -296,7 +296,7 @@ pub static ref T: std::collections::HashMap<&'static str, &'static str> =
         ("In privacy mode", "en mode privé"),
         ("Out privacy mode", "hors mode de confidentialité"),
         ("Language", "Langue"),
-        ("Keep GerarDesk background service", "Gardez le service Rustdesk service arrière plan"),
+        ("Keep GerarDesk background service", "Gardez le service Gerardesk service arrière plan"),
         ("Ignore Battery Optimizations", "Ignorer les optimisations batterie"),
         ("android_open_battery_optimizations_tip", "Conseil android d'optimisation de batterie"),
         ("Connection not allowed", "Connexion non autorisée"),

@@ -13,7 +13,7 @@ import sys
 windows = platform.platform().startswith('Windows')
 osx = platform.platform().startswith(
     'Darwin') or platform.platform().startswith("macOS")
-hbb_name = 'rustdesk' + ('.exe' if windows else '')
+hbb_name = 'gerardesk' + ('.exe' if windows else '')
 exe_path = 'target/release/' + hbb_name
 flutter_win_target_dir = 'flutter/build/windows/runner/Release/'
 skip_cargo = False
@@ -97,7 +97,7 @@ def make_parser():
     parser.add_argument(
         '--flatpak',
         action='store_true',
-        help='Build rustdesk libs with the flatpak feature enabled'
+        help='Build gerardesk libs with the flatpak feature enabled'
     )
     parser.add_argument(
         '--skip-cargo',
@@ -299,7 +299,7 @@ def build_flutter_deb(version, features):
 
     os.system('/bin/rm -rf tmpdeb/')
     os.system('/bin/rm -rf ../res/DEBIAN/control')
-    os.rename('rustdesk.deb', '../rustdesk-%s.deb' % version)
+    os.rename('rustdesk.deb', '../gerardesk-%s.deb' % version)
     os.chdir("..")
 
 
@@ -316,7 +316,7 @@ def build_flutter_dmg(version, features):
     os.system('flutter build macos --release')
     os.system(
         "create-dmg rustdesk.dmg ./build/macos/Build/Products/Release/rustdesk.app")
-    os.rename("rustdesk.dmg", f"../rustdesk-{version}.dmg")
+    os.rename("rustdesk.dmg", f"../gerardesk-{version}.dmg")
     os.chdir("..")
 
 
@@ -345,19 +345,19 @@ def build_flutter_windows(version, features):
     os.chdir('libs/portable')
     os.system('pip3 install -r requirements.txt')
     os.system(
-        f'python3 ./generate.py -f ../../{flutter_win_target_dir} -o . -e ../../{flutter_win_target_dir}/rustdesk.exe')
+        f'python3 ./generate.py -f ../../{flutter_win_target_dir} -o . -e ../../{flutter_win_target_dir}/geraresk.exe')
     os.chdir('../..')
-    if os.path.exists('./rustdesk_portable.exe'):
-        os.replace('./target/release/rustdesk-portable-packer.exe',
-                   './rustdesk_portable.exe')
+    if os.path.exists('./gerardesk_portable.exe'):
+        os.replace('./target/release/gerardesk-portable-packer.exe',
+                   './gerardesk_portable.exe')
     else:
-        os.rename('./target/release/rustdesk-portable-packer.exe',
-                  './rustdesk_portable.exe')
+        os.rename('./target/release/gerardesk-portable-packer.exe',
+                  './gerardesk_portable.exe')
     print(
-        f'output location: {os.path.abspath(os.curdir)}/rustdesk_portable.exe')
-    os.rename('./rustdesk_portable.exe', f'./rustdesk-{version}-install.exe')
+        f'output location: {os.path.abspath(os.curdir)}/gerardesk_portable.exe')
+    os.rename('./gerardesk_portable.exe', f'./gerardesk-{version}-install.exe')
     print(
-        f'output location: {os.path.abspath(os.curdir)}/rustdesk-{version}-install.exe')
+        f'output location: {os.path.abspath(os.curdir)}/gerardesk-{version}-install.exe')
 
 
 def main():
@@ -395,17 +395,17 @@ def main():
             build_flutter_windows(version, features)
             return
         os.system('cargo build --release --features ' + features)
-        # os.system('upx.exe target/release/rustdesk.exe')
-        os.system('mv target/release/rustdesk.exe target/release/RustDesk.exe')
+        # os.system('upx.exe target/release/geraresk.exe')
+        os.system('mv target/release/geraresk.exe target/release/GerarDesk.exe')
         pa = os.environ.get('P')
         if pa:
             os.system(
                 f'signtool sign /a /v /p {pa} /debug /f .\\cert.pfx /t http://timestamp.digicert.com  '
-                'target\\release\\rustdesk.exe')
+                'target\\release\\geraresk.exe')
         else:
             print('Not signed')
         os.system(
-            f'cp -rf target/release/RustDesk.exe rustdesk-{version}-win7-install.exe')
+            f'cp -rf target/release/GerarDesk.exe gerardesk-{version}-win7-install.exe')
     elif os.path.isfile('/usr/bin/pacman'):
         # pacman -S -needed base-devel
         os.system("sed -i 's/pkgver=.*/pkgver=%s/g' res/PKGBUILD" % version)
@@ -417,7 +417,7 @@ def main():
             os.system('strip target/release/rustdesk')
             os.system('ln -s res/pacman_install && ln -s res/PKGBUILD')
             os.system('HBB=`pwd` makepkg -f')
-        os.system('mv rustdesk-%s-0-x86_64.pkg.tar.zst rustdesk-%s-manjaro-arch.pkg.tar.zst' % (
+        os.system('mv gerardesk-%s-0-x86_64.pkg.tar.zst gerardesk-%s-manjaro-arch.pkg.tar.zst' % (
             version, version))
         # pacman -U ./rustdesk.pkg.tar.zst
     elif os.path.isfile('/usr/bin/yum'):
@@ -427,7 +427,7 @@ def main():
             "sed -i 's/Version:    .*/Version:    %s/g' res/rpm.spec" % version)
         os.system('HBB=`pwd` rpmbuild -ba res/rpm.spec')
         os.system(
-            'mv $HOME/rpmbuild/RPMS/x86_64/rustdesk-%s-0.x86_64.rpm ./rustdesk-%s-fedora28-centos8.rpm' % (
+            'mv $HOME/rpmbuild/RPMS/x86_64/gerardesk-%s-0.x86_64.rpm ./gerardesk-%s-fedora28-centos8.rpm' % (
                 version, version))
         # yum localinstall rustdesk.rpm
     elif os.path.isfile('/usr/bin/zypper'):
@@ -437,7 +437,7 @@ def main():
             "sed -i 's/Version:    .*/Version:    %s/g' res/rpm-suse.spec" % version)
         os.system('HBB=`pwd` rpmbuild -ba res/rpm-suse.spec')
         os.system(
-            'mv $HOME/rpmbuild/RPMS/x86_64/rustdesk-%s-0.x86_64.rpm ./rustdesk-%s-suse.rpm' % (
+            'mv $HOME/rpmbuild/RPMS/x86_64/gerardesk-%s-0.x86_64.rpm ./gerardesk-%s-suse.rpm' % (
                 version, version))
         # yum localinstall rustdesk.rpm
     else:
@@ -478,7 +478,7 @@ def main():
     '''.format(pa))
                 os.system('create-dmg target/release/bundle/osx/RustDesk.app')
                 os.rename('GerarDesk %s.dmg' %
-                          version, 'rustdesk-%s.dmg' % version)
+                          version, 'gerardesk-%s.dmg' % version)
                 if pa:
                     os.system('''
     #rcodesign sign --p12-file ~/.p12/rustdesk-developer-id.p12 --p12-password-file ~/.p12/.cert-pass --code-signature-flags runtime ./rustdesk-{1}.dmg
@@ -511,7 +511,7 @@ def main():
                 md5_file('usr/share/rustdesk/files/systemd/rustdesk.service')
                 md5_file('usr/lib/rustdesk/libsciter-gtk.so')
                 os.system('dpkg-deb -b tmpdeb rustdesk.deb; /bin/rm -rf tmpdeb/')
-                os.rename('rustdesk.deb', 'rustdesk-%s.deb' % version)
+                os.rename('rustdesk.deb', 'gerardesk-%s.deb' % version)
     os.system("mv Cargo.toml.bk Cargo.toml")
     os.system("mv src/main.rs.bk src/main.rs")
 

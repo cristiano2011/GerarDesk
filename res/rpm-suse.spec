@@ -1,4 +1,4 @@
-Name:       rustdesk 
+Name:       gerardesk 
 Version:    1.1.9
 Release:    0
 Summary:    RPM package
@@ -47,7 +47,7 @@ case "$1" in
   ;;
   2)
     # for upgrade
-    systemctl stop rustdesk || true
+    systemctl stop gerardesk || true
   ;;
 esac
 
@@ -64,8 +64,8 @@ update-desktop-database
 case "$1" in
   0)
     # for uninstall
-    systemctl stop rustdesk || true
-    systemctl disable rustdesk || true
+    systemctl stop gerardesk || true
+    systemctl disable gerardesk || true
     rm /etc/systemd/system/rustdesk.service || true
   ;;
   1)
