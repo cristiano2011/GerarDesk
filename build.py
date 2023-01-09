@@ -136,7 +136,7 @@ def generate_build_script_for_docker():
             vcpkg/bootstrap-vcpkg.sh
             vcpkg/vcpkg install libvpx libyuv opus
             popd
-            # build rustdesk
+            # build gerardesk
             ./build.py --flutter --hwcodec
         ''')
     os.system("chmod +x /tmp/build.sh")
@@ -244,11 +244,11 @@ def generate_control_file(version):
     control_file_path = "../res/DEBIAN/control"
     os.system('/bin/rm -rf %s' % control_file_path)
 
-    content = """Package: rustdesk
+    content = """Package: gerardesk
 Version: %s
 Architecture: amd64
-Maintainer: open-trade <info@rustdesk.com>
-Homepage: https://rustdesk.com
+Maintainer: open-trade <info@gerardesk.com>
+Homepage: https://gerardesk.com
 Depends: libgtk-3-0, libxcb-randr0, libxdo3, libxfixes3, libxcb-shape0, libxcb-xfixes0, libasound2, libsystemd0, curl, libva-drm2, libva-x11-2, libvdpau1, libgstreamer-plugins-base1.0-0
 Description: A remote control software.
 
@@ -271,13 +271,13 @@ def build_flutter_deb(version, features):
     os.chdir('flutter')
     os.system('flutter build linux --release')
     os.system('mkdir -p tmpdeb/usr/bin/')
-    os.system('mkdir -p tmpdeb/usr/lib/rustdesk')
-    os.system('mkdir -p tmpdeb/usr/share/rustdesk/files/systemd/')
+    os.system('mkdir -p tmpdeb/usr/lib/gerardesk')
+    os.system('mkdir -p tmpdeb/usr/share/gerardesk/files/systemd/')
     os.system('mkdir -p tmpdeb/usr/share/applications/')
     os.system('mkdir -p tmpdeb/usr/share/polkit-1/actions')
-    os.system('rm tmpdeb/usr/bin/rustdesk || true')
+    os.system('rm tmpdeb/usr/bin/gerardesk || true')
     os.system(
-        'cp -r build/linux/x64/release/bundle/* tmpdeb/usr/lib/rustdesk/')
+        'cp -r build/linux/x64/release/bundle/* tmpdeb/usr/lib/gerardesk/')
     os.system(
         'cp ../res/rustdesk.service tmpdeb/usr/share/rustdesk/files/systemd/')
     os.system(
@@ -294,12 +294,12 @@ def build_flutter_deb(version, features):
     os.system('mkdir -p tmpdeb/DEBIAN')
     generate_control_file(version)
     os.system('cp -a ../res/DEBIAN/* tmpdeb/DEBIAN/')
-    md5_file('usr/share/rustdesk/files/systemd/rustdesk.service')
-    os.system('dpkg-deb -b tmpdeb rustdesk.deb;')
+    md5_file('usr/share/rustdesk/files/systemd/gerardesk.service')
+    os.system('dpkg-deb -b tmpdeb gerardesk.deb;')
 
     os.system('/bin/rm -rf tmpdeb/')
     os.system('/bin/rm -rf ../res/DEBIAN/control')
-    os.rename('rustdesk.deb', '../gerardesk-%s.deb' % version)
+    os.rename('gerardesk.deb', '../gerardesk-%s.deb' % version)
     os.chdir("..")
 
 
@@ -315,8 +315,8 @@ def build_flutter_dmg(version, features):
     os.chdir('flutter')
     os.system('flutter build macos --release')
     os.system(
-        "create-dmg rustdesk.dmg ./build/macos/Build/Products/Release/rustdesk.app")
-    os.rename("rustdesk.dmg", f"../gerardesk-{version}.dmg")
+        "create-dmg gerardesk.dmg ./build/macos/Build/Products/Release/gerardesk.app")
+    os.rename("gerardesk.dmg", f"../gerardesk-{version}.dmg")
     os.chdir("..")
 
 
@@ -414,32 +414,32 @@ def main():
         else:
             os.system('cargo build --release --features ' + features)
             os.system('git checkout src/ui/common.tis')
-            os.system('strip target/release/rustdesk')
+            os.system('strip target/release/gerardesk')
             os.system('ln -s res/pacman_install && ln -s res/PKGBUILD')
             os.system('HBB=`pwd` makepkg -f')
         os.system('mv gerardesk-%s-0-x86_64.pkg.tar.zst gerardesk-%s-manjaro-arch.pkg.tar.zst' % (
             version, version))
-        # pacman -U ./rustdesk.pkg.tar.zst
+        # pacman -U ./gerardesk.pkg.tar.zst
     elif os.path.isfile('/usr/bin/yum'):
         os.system('cargo build --release --features ' + features)
-        os.system('strip target/release/rustdesk')
+        os.system('strip target/release/gerardesk')
         os.system(
             "sed -i 's/Version:    .*/Version:    %s/g' res/rpm.spec" % version)
         os.system('HBB=`pwd` rpmbuild -ba res/rpm.spec')
         os.system(
             'mv $HOME/rpmbuild/RPMS/x86_64/gerardesk-%s-0.x86_64.rpm ./gerardesk-%s-fedora28-centos8.rpm' % (
                 version, version))
-        # yum localinstall rustdesk.rpm
+        # yum localinstall gerardesk.rpm
     elif os.path.isfile('/usr/bin/zypper'):
         os.system('cargo build --release --features ' + features)
-        os.system('strip target/release/rustdesk')
+        os.system('strip target/release/gerardesk')
         os.system(
             "sed -i 's/Version:    .*/Version:    %s/g' res/rpm-suse.spec" % version)
         os.system('HBB=`pwd` rpmbuild -ba res/rpm-suse.spec')
         os.system(
             'mv $HOME/rpmbuild/RPMS/x86_64/gerardesk-%s-0.x86_64.rpm ./gerardesk-%s-suse.rpm' % (
                 version, version))
-        # yum localinstall rustdesk.rpm
+        # yum localinstall gerardesk.rpm
     else:
         if flutter:
             if osx:
@@ -447,18 +447,18 @@ def main():
                 pass
             else:
                 # os.system(
-                #     'mv target/release/bundle/deb/rustdesk*.deb ./flutter/rustdesk.deb')
+                #     'mv target/release/bundle/deb/gerardesk*.deb ./flutter/gerardesk.deb')
                 build_flutter_deb(version, features)
         else:
             os.system('cargo bundle --release --features ' + features)
             if osx:
                 os.system(
-                    'strip target/release/bundle/osx/RustDesk.app/Contents/MacOS/rustdesk')
+                    'strip target/release/bundle/osx/GerarDesk.app/Contents/MacOS/gerardesk')
                 os.system(
-                    'cp libsciter.dylib target/release/bundle/osx/RustDesk.app/Contents/MacOS/')
+                    'cp libsciter.dylib target/release/bundle/osx/GerarDesk.app/Contents/MacOS/')
                 # https://github.com/sindresorhus/create-dmg
                 os.system('/bin/rm -rf *.dmg')
-                plist = "target/release/bundle/osx/RustDesk.app/Contents/Info.plist"
+                plist = "target/release/bundle/osx/GerarDesk.app/Contents/Info.plist"
                 txt = open(plist).read()
                 with open(plist, "wt") as fh:
                     fh.write(txt.replace("</dict>", """
@@ -469,31 +469,31 @@ def main():
                 if pa:
                     os.system('''
     # buggy: rcodesign sign ... path/*, have to sign one by one
-    #rcodesign sign --p12-file ~/.p12/rustdesk-developer-id.p12 --p12-password-file ~/.p12/.cert-pass --code-signature-flags runtime ./target/release/bundle/osx/RustDesk.app/Contents/MacOS/rustdesk
-    #rcodesign sign --p12-file ~/.p12/rustdesk-developer-id.p12 --p12-password-file ~/.p12/.cert-pass --code-signature-flags runtime ./target/release/bundle/osx/RustDesk.app/Contents/MacOS/libsciter.dylib
-    #rcodesign sign --p12-file ~/.p12/rustdesk-developer-id.p12 --p12-password-file ~/.p12/.cert-pass --code-signature-flags runtime ./target/release/bundle/osx/RustDesk.app
+    #rcodesign sign --p12-file ~/.p12/rustdesk-developer-id.p12 --p12-password-file ~/.p12/.cert-pass --code-signature-flags runtime ./target/release/bundle/osx/GerarDesk.app/Contents/MacOS/rustdesk
+    #rcodesign sign --p12-file ~/.p12/rustdesk-developer-id.p12 --p12-password-file ~/.p12/.cert-pass --code-signature-flags runtime ./target/release/bundle/osx/GerarDesk.app/Contents/MacOS/libsciter.dylib
+    #rcodesign sign --p12-file ~/.p12/rustdesk-developer-id.p12 --p12-password-file ~/.p12/.cert-pass --code-signature-flags runtime ./target/release/bundle/osx/GerarDesk.app
     # goto "Keychain Access" -> "My Certificates" for below id which starts with "Developer ID Application:"
-    codesign -s "Developer ID Application: {0}" --force --options runtime  ./target/release/bundle/osx/RustDesk.app/Contents/MacOS/*
-    codesign -s "Developer ID Application: {0}" --force --options runtime  ./target/release/bundle/osx/RustDesk.app
+    codesign -s "Developer ID Application: {0}" --force --options runtime  ./target/release/bundle/osx/GerarDesk.app/Contents/MacOS/*
+    codesign -s "Developer ID Application: {0}" --force --options runtime  ./target/release/bundle/osx/GerarDesk.app
     '''.format(pa))
-                os.system('create-dmg target/release/bundle/osx/RustDesk.app')
+                os.system('create-dmg target/release/bundle/osx/GerarDesk.app')
                 os.rename('GerarDesk %s.dmg' %
                           version, 'gerardesk-%s.dmg' % version)
                 if pa:
                     os.system('''
-    #rcodesign sign --p12-file ~/.p12/rustdesk-developer-id.p12 --p12-password-file ~/.p12/.cert-pass --code-signature-flags runtime ./rustdesk-{1}.dmg
-    codesign -s "Developer ID Application: {0}" --force --options runtime ./rustdesk-{1}.dmg
+    #rcodesign sign --p12-file ~/.p12/rustdesk-developer-id.p12 --p12-password-file ~/.p12/.cert-pass --code-signature-flags runtime ./gerardesk-{1}.dmg
+    codesign -s "Developer ID Application: {0}" --force --options runtime ./gerardesk-{1}.dmg
     # https://pyoxidizer.readthedocs.io/en/latest/apple_codesign_rcodesign.html
-    rcodesign notarize --api-issuer {2} --api-key {3} --staple ./rustdesk-{1}.dmg
-    # verify:  spctl -a -t exec -v /Applications/RustDesk.app
+    rcodesign notarize --api-issuer {2} --api-key {3} --staple ./gerardesk-{1}.dmg
+    # verify:  spctl -a -t exec -v /Applications/GerarDesk.app
     '''.format(pa, version, os.environ.get('api-issuer'), os.environ.get('api-key')))
                 else:
                     print('Not signed')
             else:
                 # buid deb package
                 os.system(
-                    'mv target/release/bundle/deb/rustdesk*.deb ./rustdesk.deb')
-                os.system('dpkg-deb -R rustdesk.deb tmpdeb')
+                    'mv target/release/bundle/deb/gerardesk*.deb ./gerardesk.deb')
+                os.system('dpkg-deb -R gerardesk.deb tmpdeb')
                 os.system('mkdir -p tmpdeb/usr/share/rustdesk/files/systemd/')
                 os.system(
                     'cp res/rustdesk.service tmpdeb/usr/share/rustdesk/files/systemd/')
@@ -504,14 +504,14 @@ def main():
                 os.system(
                     'cp res/rustdesk-link.desktop tmpdeb/usr/share/applications/rustdesk-link.desktop')
                 os.system('cp -a res/DEBIAN/* tmpdeb/DEBIAN/')
-                os.system('strip tmpdeb/usr/bin/rustdesk')
-                os.system('mkdir -p tmpdeb/usr/lib/rustdesk')
-                os.system('mv tmpdeb/usr/bin/rustdesk tmpdeb/usr/lib/rustdesk/')
-                os.system('cp libsciter-gtk.so tmpdeb/usr/lib/rustdesk/')
+                os.system('strip tmpdeb/usr/bin/gerardesk')
+                os.system('mkdir -p tmpdeb/usr/lib/gerardesk')
+                os.system('mv tmpdeb/usr/bin/rustdesk tmpdeb/usr/lib/gerardesk/')
+                os.system('cp libsciter-gtk.so tmpdeb/usr/lib/gerardesk/')
                 md5_file('usr/share/rustdesk/files/systemd/rustdesk.service')
                 md5_file('usr/lib/rustdesk/libsciter-gtk.so')
-                os.system('dpkg-deb -b tmpdeb rustdesk.deb; /bin/rm -rf tmpdeb/')
-                os.rename('rustdesk.deb', 'gerardesk-%s.deb' % version)
+                os.system('dpkg-deb -b tmpdeb gerardesk.deb; /bin/rm -rf tmpdeb/')
+                os.rename('gerardesk.deb', 'gerardesk-%s.deb' % version)
     os.system("mv Cargo.toml.bk Cargo.toml")
     os.system("mv src/main.rs.bk src/main.rs")
 
