@@ -26,7 +26,7 @@ pub fn is_sync_clipboard_between_sessions_enabled() -> bool {
 }
 
 // This format is used to store the flag in the clipboard.
-const RUSTDESK_CLIPBOARD_OWNER_FORMAT: &'static str = "dyn.com.rustdesk.owner";
+const GERARDESK_CLIPBOARD_OWNER_FORMAT: &'static str = "dyn.com.rustdesk.owner";
 
 // Add special format for Excel XML Spreadsheet
 const CLIPBOARD_FORMAT_EXCEL_XML_SPREADSHEET: &'static str = "XML Spreadsheet";
@@ -68,7 +68,7 @@ const SUPPORTED_FORMATS: &[ClipboardFormat] = &[
     #[cfg(feature = "unix-file-copy-paste")]
     ClipboardFormat::FileUrl,
     ClipboardFormat::Special(CLIPBOARD_FORMAT_EXCEL_XML_SPREADSHEET),
-    ClipboardFormat::Special(RUSTDESK_CLIPBOARD_OWNER_FORMAT),
+    ClipboardFormat::Special(GERARDESK_CLIPBOARD_OWNER_FORMAT),
 ];
 
 #[cfg(not(target_os = "android"))]
@@ -282,7 +282,7 @@ fn do_update_clipboard_(mut to_update_data: Vec<ClipboardData>, side: ClipboardS
 #[cfg(not(target_os = "android"))]
 fn append_owner_marker(mut data: Vec<ClipboardData>, side: ClipboardSide) -> Vec<ClipboardData> {
     data.push(ClipboardData::Special((
-        RUSTDESK_CLIPBOARD_OWNER_FORMAT.to_owned(),
+        GERARDESK_CLIPBOARD_OWNER_FORMAT.to_owned(),
         side.get_owner_data(),
     )));
     data
@@ -410,7 +410,7 @@ impl ClipboardContext {
         if !force {
             for c in data.iter() {
                 if let ClipboardData::Special((s, d)) = c {
-                    if s == RUSTDESK_CLIPBOARD_OWNER_FORMAT && side.is_owner(d) {
+                    if s == GERARDESK_CLIPBOARD_OWNER_FORMAT && side.is_owner(d) {
                         return Ok(vec![]);
                     }
                 }
@@ -419,7 +419,7 @@ impl ClipboardContext {
         Ok(data
             .into_iter()
             .filter(|c| match c {
-                ClipboardData::Special((s, _)) => s != RUSTDESK_CLIPBOARD_OWNER_FORMAT,
+                ClipboardData::Special((s, _)) => s != GERARDESK_CLIPBOARD_OWNER_FORMAT,
                 // Skip synchronizing empty text to the remote clipboard
                 ClipboardData::Text(text) => !text.is_empty(),
                 _ => true,
@@ -436,7 +436,7 @@ impl ClipboardContext {
         let data = self.get_formats_filter(
             &[
                 ClipboardFormat::FileUrl,
-                ClipboardFormat::Special(RUSTDESK_CLIPBOARD_OWNER_FORMAT),
+                ClipboardFormat::Special(GERARDESK_CLIPBOARD_OWNER_FORMAT),
             ],
             side,
             force,
@@ -521,7 +521,7 @@ impl ClipboardContext {
                 #[cfg(target_os = "macos")]
                 let is_kde_x11 = false;
                 let clear_holder_text = if is_kde_x11 {
-                    "RustDesk placeholder to clear the file clipboard"
+                    "GerarDesk placeholder to clear the file clipboard"
                 } else {
                     ""
                 }
@@ -530,7 +530,7 @@ impl ClipboardContext {
                     .set_formats(&[
                         ClipboardData::Text(clear_holder_text),
                         ClipboardData::Special((
-                            RUSTDESK_CLIPBOARD_OWNER_FORMAT.to_owned(),
+                            GERARDESK_CLIPBOARD_OWNER_FORMAT.to_owned(),
                             side.get_owner_data(),
                         )),
                     ])

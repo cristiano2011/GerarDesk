@@ -70,7 +70,7 @@ mod tests {
     use super::*;
     use std::io::Cursor;
 
-    const RUSTDESK_SHA256: &str =
+    const GERARDESK_SHA256: &str =
         "304ca1638c5effa6832e0e15b958a8f74847efe4df9c3f3187216e921c168fed";
 
     #[test]
@@ -80,7 +80,7 @@ mod tests {
 
         verify_sha256_reader(
             &mut reader,
-            &format!("  {}  ", RUSTDESK_SHA256.to_uppercase()),
+            &format!("  {}  ", GERARDESK_SHA256.to_uppercase()),
         )
         .unwrap();
 

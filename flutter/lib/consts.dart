@@ -22,7 +22,7 @@ const kKeyTranslateMode = 'translate';
 const String kPlatformAdditionsIsWayland = "is_wayland";
 const String kPlatformAdditionsIsInstalled = "is_installed";
 const String kPlatformAdditionsIddImpl = "idd_impl";
-const String kPlatformAdditionsRustDeskVirtualDisplays =
+const String kPlatformAdditionsGerarDeskVirtualDisplays =
     "rustdesk_virtual_displays";
 const String kPlatformAdditionsAmyuniVirtualDisplays =
     "amyuni_virtual_displays";
@@ -262,7 +262,7 @@ const String kKeyReverseMouseWheel = "reverse_mouse_wheel";
 const String kMsgboxTextWaitingForImage = 'Connected, waiting for image...';
 
 // the executable name of the portable version
-const String kEnvPortableExecutable = "RUSTDESK_APPNAME";
+const String kEnvPortableExecutable = "GERARDESK_APPNAME";
 
 const Color kColorWarn = Color.fromARGB(255, 245, 133, 59);
 const Color kColorCanvas = Colors.black;

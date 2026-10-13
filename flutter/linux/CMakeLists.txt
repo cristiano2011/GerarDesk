@@ -185,12 +185,12 @@ foreach(bundled_library ${PLUGIN_BUNDLED_LIBRARIES})
 endforeach(bundled_library)
 
 # flutter_rust_bridge
-set(RUSTDESK_LIB_BUILD_TYPE $<IF:$<CONFIG:Debug>,debug,release>)
-string(TOLOWER ${CMAKE_BUILD_TYPE} ${RUSTDESK_LIB_BUILD_TYPE})
-message(STATUS "rustdesk lib build type: ${RUSTDESK_LIB_BUILD_TYPE}")
+set(GERARDESK_LIB_BUILD_TYPE $<IF:$<CONFIG:Debug>,debug,release>)
+string(TOLOWER ${CMAKE_BUILD_TYPE} ${GERARDESK_LIB_BUILD_TYPE})
+message(STATUS "rustdesk lib build type: ${GERARDESK_LIB_BUILD_TYPE}")
 
-set(RUSTDESK_LIB "../../target/${RUSTDESK_LIB_BUILD_TYPE}/liblibrustdesk.so")
-install(FILES "${RUSTDESK_LIB}" DESTINATION "${INSTALL_BUNDLE_LIB_DIR}"
+set(GERARDESK_LIB "../../target/${GERARDESK_LIB_BUILD_TYPE}/liblibrustdesk.so")
+install(FILES "${GERARDESK_LIB}" DESTINATION "${INSTALL_BUNDLE_LIB_DIR}"
 COMPONENT Runtime RENAME librustdesk.so)
 
 # Fully re-copy the assets directory on each build to avoid having stale files

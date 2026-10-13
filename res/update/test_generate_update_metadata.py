@@ -36,12 +36,12 @@ class GenerateUpdateMetadataTest(unittest.TestCase):
 
     def run_script(self, *args, seed=None, public_key=None):
         env = os.environ.copy()
-        env.pop("RUSTDESK_UPDATE_ED25519_SEED", None)
-        env.pop("RUSTDESK_UPDATE_ED25519_PUBLIC_KEY", None)
+        env.pop("GERARDESK_UPDATE_ED25519_SEED", None)
+        env.pop("GERARDESK_UPDATE_ED25519_PUBLIC_KEY", None)
         if seed is not None:
-            env["RUSTDESK_UPDATE_ED25519_SEED"] = seed
+            env["GERARDESK_UPDATE_ED25519_SEED"] = seed
         if public_key is not None:
-            env["RUSTDESK_UPDATE_ED25519_PUBLIC_KEY"] = public_key
+            env["GERARDESK_UPDATE_ED25519_PUBLIC_KEY"] = public_key
         return subprocess.run(
             [sys.executable, str(SCRIPT), *args],
             cwd=SCRIPT.parents[2],

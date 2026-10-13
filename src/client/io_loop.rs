@@ -82,7 +82,7 @@ pub struct Remote<T: InvokeUiSession> {
     read_jobs: Vec<fs::TransferJob>,
     write_jobs: Vec<fs::TransferJob>,
     remove_jobs: HashMap<i32, RemoveJob>,
-    timer: crate::RustDeskInterval,
+    timer: crate::GerarDeskInterval,
     last_update_jobs_status: (Instant, HashMap<i32, u64>),
     // Set after PeerInfo for this round, not when the transport connects.
     is_connected: bool,

@@ -98,12 +98,12 @@ fn launch_verified_exe(exe: &str, expected_sha256: &str) -> ResultType<()> {
     // Keep the hash outside the EXE directory because update_me() copies that
     // entire directory into the installation.
     let commands = format!(
-        "set \"RUSTDESK_VERIFIED_EXE_SOURCE={source}\"\r\n\
-         set \"RUSTDESK_VERIFIED_EXE=%RUSTDESK_OUTPUT_DIR%\\{VERIFIED_EXE_FILENAME}\"\r\n\
-         copy /B /Y \"%RUSTDESK_VERIFIED_EXE_SOURCE%\" \"%RUSTDESK_VERIFIED_EXE%\" > nul || exit /b {VERIFIED_UPDATE_COPY_FAILURE_EXIT_CODE}\r\n\
-         certutil.exe -hashfile \"%RUSTDESK_VERIFIED_EXE%\" SHA256 > \"%~f0.exe.sha256\" || exit /b {VERIFIED_UPDATE_HASH_FAILURE_EXIT_CODE}\r\n\
+        "set \"GERARDESK_VERIFIED_EXE_SOURCE={source}\"\r\n\
+         set \"GERARDESK_VERIFIED_EXE=%GERARDESK_OUTPUT_DIR%\\{VERIFIED_EXE_FILENAME}\"\r\n\
+         copy /B /Y \"%GERARDESK_VERIFIED_EXE_SOURCE%\" \"%GERARDESK_VERIFIED_EXE%\" > nul || exit /b {VERIFIED_UPDATE_COPY_FAILURE_EXIT_CODE}\r\n\
+         certutil.exe -hashfile \"%GERARDESK_VERIFIED_EXE%\" SHA256 > \"%~f0.exe.sha256\" || exit /b {VERIFIED_UPDATE_HASH_FAILURE_EXIT_CODE}\r\n\
          findstr.exe /R /I /X /C:\"{hash_pattern}\" \"%~f0.exe.sha256\" > nul || exit /b {VERIFIED_UPDATE_HASH_MISMATCH_EXIT_CODE}\r\n\
-         start \"\" /wait \"%RUSTDESK_VERIFIED_EXE%\" --update || exit /b {VERIFIED_EXE_LAUNCH_FAILURE_EXIT_CODE}"
+         start \"\" /wait \"%GERARDESK_VERIFIED_EXE%\" --update || exit /b {VERIFIED_EXE_LAUNCH_FAILURE_EXIT_CODE}"
     );
     run_cmds(commands, false, "update-exe")
 }
@@ -138,16 +138,16 @@ fn verified_msi_install_commands(
         " INSTALLPRINTER=0"
     };
     Ok(format!(
-        "set \"RUSTDESK_VERIFIED_MSI_SOURCE={source}\"\r\n\
-         set \"RUSTDESK_VERIFIED_MSI=%RUSTDESK_OUTPUT_DIR%\\{VERIFIED_MSI_FILENAME}\"\r\n\
-         copy /B /Y \"%RUSTDESK_VERIFIED_MSI_SOURCE%\" \"%RUSTDESK_VERIFIED_MSI%\" > nul || exit /b {VERIFIED_UPDATE_COPY_FAILURE_EXIT_CODE}\r\n\
-         certutil.exe -hashfile \"%RUSTDESK_VERIFIED_MSI%\" SHA256 > \"%RUSTDESK_VERIFIED_MSI%.sha256\" || exit /b {VERIFIED_UPDATE_HASH_FAILURE_EXIT_CODE}\r\n\
-         findstr.exe /R /I /X /C:\"{hash_pattern}\" \"%RUSTDESK_VERIFIED_MSI%.sha256\" > nul || exit /b {VERIFIED_UPDATE_HASH_MISMATCH_EXIT_CODE}\r\n\
-         msiexec.exe /i \"%RUSTDESK_VERIFIED_MSI%\"{quiet_args}{printer_args} REBOOT=ReallySuppress /norestart\r\n\
-         set \"RUSTDESK_MSI_EXIT_CODE=%ERRORLEVEL%\"\r\n\
-         if \"%RUSTDESK_MSI_EXIT_CODE%\"==\"{reboot_initiated}\" exit /b {success}\r\n\
-         if \"%RUSTDESK_MSI_EXIT_CODE%\"==\"{reboot_required}\" exit /b {success}\r\n\
-         exit /b %RUSTDESK_MSI_EXIT_CODE%",
+        "set \"GERARDESK_VERIFIED_MSI_SOURCE={source}\"\r\n\
+         set \"GERARDESK_VERIFIED_MSI=%GERARDESK_OUTPUT_DIR%\\{VERIFIED_MSI_FILENAME}\"\r\n\
+         copy /B /Y \"%GERARDESK_VERIFIED_MSI_SOURCE%\" \"%GERARDESK_VERIFIED_MSI%\" > nul || exit /b {VERIFIED_UPDATE_COPY_FAILURE_EXIT_CODE}\r\n\
+         certutil.exe -hashfile \"%GERARDESK_VERIFIED_MSI%\" SHA256 > \"%GERARDESK_VERIFIED_MSI%.sha256\" || exit /b {VERIFIED_UPDATE_HASH_FAILURE_EXIT_CODE}\r\n\
+         findstr.exe /R /I /X /C:\"{hash_pattern}\" \"%GERARDESK_VERIFIED_MSI%.sha256\" > nul || exit /b {VERIFIED_UPDATE_HASH_MISMATCH_EXIT_CODE}\r\n\
+         msiexec.exe /i \"%GERARDESK_VERIFIED_MSI%\"{quiet_args}{printer_args} REBOOT=ReallySuppress /norestart\r\n\
+         set \"GERARDESK_MSI_EXIT_CODE=%ERRORLEVEL%\"\r\n\
+         if \"%GERARDESK_MSI_EXIT_CODE%\"==\"{reboot_initiated}\" exit /b {success}\r\n\
+         if \"%GERARDESK_MSI_EXIT_CODE%\"==\"{reboot_required}\" exit /b {success}\r\n\
+         exit /b %GERARDESK_MSI_EXIT_CODE%",
         success = ERROR_SUCCESS.0,
         reboot_initiated = ERROR_SUCCESS_REBOOT_INITIATED.0,
         reboot_required = ERROR_SUCCESS_REBOOT_REQUIRED.0,

@@ -60,7 +60,7 @@ fn prepare_install_commands(commands: &str) -> ResultType<String> {
          {}\r\n\
          if exist \"%~f0.dir\" exit /b {BATCH_OUTPUT_DIRECTORY_EXISTS_EXIT_CODE}\r\n\
          md \"%~f0.dir\" || exit /b {BATCH_OUTPUT_DIRECTORY_CREATE_FAILURE_EXIT_CODE}\r\n\
-         set \"RUSTDESK_OUTPUT_DIR=%~f0.dir\"\r\n{commands}\r\nexit /b 0\r\n",
+         set \"GERARDESK_OUTPUT_DIR=%~f0.dir\"\r\n{commands}\r\nexit /b 0\r\n",
         trusted_install_environment()?
     ))
 }
@@ -188,12 +188,12 @@ mod tests {
             uuid::Uuid::new_v4().simple()
         ));
         let runner_dir = std::env::temp_dir().join(format!(
-            "rustdesk_install_!RUSTDESK_HANDOFF_EXPAND!&^@()runner_{}",
+            "rustdesk_install_!GERARDESK_HANDOFF_EXPAND!&^@()runner_{}",
             uuid::Uuid::new_v4().simple()
         ));
         std::fs::create_dir(&runner_dir).expect("runner directory should be created");
         let shortcut_commands = embedded_shortcut_commands(
-            shortcut_bytes(r"C:\RustDesk.exe", None, None)
+            shortcut_bytes(r"C:\GerarDesk.exe", None, None)
                 .expect("native shortcut should be generated"),
             "test.lnk",
             "test",
@@ -278,7 +278,7 @@ mod tests {
         command
             .env("PROGRAMDATA", "rustdesk_untrusted")
             .env("PUBLIC", "rustdesk_untrusted")
-            .env("RUSTDESK_HANDOFF_EXPAND", "expanded");
+            .env("GERARDESK_HANDOFF_EXPAND", "expanded");
         command.raw_arg(format!("/D /E:ON /V:ON /C {bootstrap}"));
         command
             .creation_flags(Threading::CREATE_NO_WINDOW.0)

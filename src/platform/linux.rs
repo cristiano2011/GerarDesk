@@ -114,7 +114,7 @@ lazy_static::lazy_static! {
             log::warn!("Not running as root, SUDO_E_PRESERVES_ENV check skipped");
             false
         } else {
-            let key = format!("__RUSTDESK_SUDO_E_TEST_{}", std::process::id());
+            let key = format!("__GERARDESK_SUDO_E_TEST_{}", std::process::id());
             let val = "1";
             let expected = format!("{key}={val}");
             Command::new("sudo")
@@ -408,13 +408,13 @@ pub fn is_login_screen_wayland() -> bool {
     is_gdm_user(&values[1]) && get_display_server_of_session(&values[0]) == DISPLAY_SERVER_WAYLAND
 }
 
-/// An explicit `RUSTDESK_FORCED_DISPLAY_SERVER` is an operator override, and the root service
+/// An explicit `GERARDESK_FORCED_DISPLAY_SERVER` is an operator override, and the root service
 /// forwards it to the per-user server on purpose: the greeter correction may only fix an
 /// AUTO-detected answer, never argue with the operator — a half-applied override would leave
 /// `get_display_server()` and the DRM routing gates disagreeing with each other.
 #[cfg(feature = "drm")]
 pub(crate) fn display_server_forced() -> bool {
-    std::env::var("RUSTDESK_FORCED_DISPLAY_SERVER").is_ok()
+    std::env::var("GERARDESK_FORCED_DISPLAY_SERVER").is_ok()
 }
 
 /// X11 as far as the DRM path is concerned: a Wayland greeter is not, unless the operator
@@ -925,11 +925,11 @@ fn try_start_server_(desktop: Option<&Desktop>) -> ResultType<Option<Child>> {
                 envs.push(("DBUS_SESSION_BUS_ADDRESS", desktop.dbus.clone()));
             }
             if let Ok(forced_display_server) =
-                std::env::var("RUSTDESK_FORCED_DISPLAY_SERVER")
+                std::env::var("GERARDESK_FORCED_DISPLAY_SERVER")
             {
                 if !forced_display_server.is_empty() {
                     envs.push((
-                        "RUSTDESK_FORCED_DISPLAY_SERVER",
+                        "GERARDESK_FORCED_DISPLAY_SERVER",
                         forced_display_server,
                     ));
                 }

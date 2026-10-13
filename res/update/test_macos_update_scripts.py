@@ -40,8 +40,8 @@ class MacosUpdateScriptTests(unittest.TestCase):
                     listener.listen(1)
                     script = DAEMON_SCRIPT.split("  set sh to", 1)[0]
                     script += f"  return {check}\nend run\n"
-                    script = script.replace("/tmp/RustDesk-service/ipc_service", path)
-                    script = script.replace("/tmp/RustDesk-$uid/ipc", path)
+                    script = script.replace("/tmp/GerarDesk-service/ipc_service", path)
+                    script = script.replace("/tmp/GerarDesk-$uid/ipc", path)
                     command = subprocess.check_output(
                         ["osascript", "-e", script, "test", "0", "", ""],
                         text=True,

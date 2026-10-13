@@ -5,8 +5,8 @@
 #include <unistd.h>
 #include "my_application.h"
 
-#define RUSTDESK_LIB_PATH "librustdesk.so"
-typedef bool (*RustDeskCoreMain)();
+#define GERARDESK_LIB_PATH "librustdesk.so"
+typedef bool (*GerarDeskCoreMain)();
 bool gIsConnectionManager = false;
 
 void print_help_install_pkg(const char* so);
@@ -23,8 +23,8 @@ static void* dlopen_bundled_lib() {
   char* last_slash = strrchr(exe_path, '/');
   if (last_slash == nullptr) return nullptr;
   *last_slash = '\0';
-  char lib_path[PATH_MAX + sizeof("/lib/" RUSTDESK_LIB_PATH)];
-  snprintf(lib_path, sizeof(lib_path), "%s/lib/%s", exe_path, RUSTDESK_LIB_PATH);
+  char lib_path[PATH_MAX + sizeof("/lib/" GERARDESK_LIB_PATH)];
+  snprintf(lib_path, sizeof(lib_path), "%s/lib/%s", exe_path, GERARDESK_LIB_PATH);
   if (access(lib_path, F_OK) != 0) return nullptr;
   void* librustdesk = dlopen(lib_path, RTLD_LAZY);
   if (!librustdesk) {
@@ -39,7 +39,7 @@ static void* dlopen_bundled_lib() {
 bool flutter_rustdesk_core_main() {
    void* librustdesk = dlopen_bundled_lib();
    if (!librustdesk) {
-      librustdesk = dlopen(RUSTDESK_LIB_PATH, RTLD_LAZY);
+      librustdesk = dlopen(GERARDESK_LIB_PATH, RTLD_LAZY);
    }
    if (!librustdesk) {
       fprintf(stderr,"Failed to load \"librustdesk.so\"\n");
@@ -56,7 +56,7 @@ bool flutter_rustdesk_core_main() {
       }
      return false;
    }
-   auto core_main = (RustDeskCoreMain) dlsym(librustdesk,"rustdesk_core_main");
+   auto core_main = (GerarDeskCoreMain) dlsym(librustdesk,"rustdesk_core_main");
    char* error;
    if ((error = dlerror()) != nullptr) {
        fprintf(stderr, "Program entry \"rustdesk_core_main\" is not found: %s\n", error);

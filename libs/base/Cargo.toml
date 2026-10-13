@@ -4,7 +4,7 @@ version = "0.1.0"
 authors = ["rustdesk <info@rustdesk.com>"]
 edition = "2018"
 
-# Code that only RustDesk itself uses. `hbb_common` stays the crate shared with
+# Code that only GerarDesk itself uses. `hbb_common` stays the crate shared with
 # the server, so anything the server never touches belongs here instead.
 
 [features]

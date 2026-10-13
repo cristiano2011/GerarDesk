@@ -368,7 +368,7 @@ fn correct_app_name(s: &str) -> String {
         s = s.replace("com.carriez.rustdesk", &bundleid);
     }
     s = s.replace("rustdesk", &crate::get_app_name().to_lowercase());
-    s = s.replace("RustDesk", &crate::get_app_name());
+    s = s.replace("GerarDesk", &crate::get_app_name());
     s
 }
 
@@ -866,8 +866,8 @@ pub fn start_os_service() {
     /* // mouse/keyboard works in prelogin now with launchctl asuser.
        // below can avoid multi-users logged in problem, but having its own below problem.
        // Not find a good way to start --cm without root privilege (affect file transfer).
-       // one way is to start with `launchctl asuser <uid> open -n -a /Applications/RustDesk.app/ --args --cm`,
-       // this way --cm is started with the user privilege, but we will have problem to start another RustDesk.app
+       // one way is to start with `launchctl asuser <uid> open -n -a /Applications/GerarDesk.app/ --args --cm`,
+       // this way --cm is started with the user privilege, but we will have problem to start another GerarDesk.app
        // with open in explorer.
         use std::sync::{
             atomic::{AtomicBool, Ordering},
@@ -948,7 +948,7 @@ pub fn quit_gui() {
 
 pub fn update_me() -> ResultType<()> {
     let cmd = std::env::current_exe()?;
-    // RustDesk.app/Contents/MacOS/RustDesk
+    // GerarDesk.app/Contents/MacOS/GerarDesk
     let app_dir = cmd
         .parent()
         .and_then(|p| p.parent())
@@ -1314,7 +1314,7 @@ pub fn update_from_dmg_as_root(dmg_path: &str, expected_version: &str) -> Result
         .join(" ");
 
     // Write a shell script that runs detached after this function returns.
-    // We cannot directly replace /Applications/RustDesk.app while it is running,
+    // We cannot directly replace /Applications/GerarDesk.app while it is running,
     // so we spawn a script that waits, kills processes, copies, and restarts.
     let daemon_label = format!("com.carriez.{}_service", app_name);
     let agent_label = format!("com.carriez.{}_server", app_name);
@@ -1695,7 +1695,7 @@ fi
 # Agents have already been verified absent. Stop and verify any remaining GUI
 # processes as well so no process keeps the old bundle mapped across the swap.
 if ! stop_user_bundle_processes; then
-    echo "[root-update] RustDesk GUI process did not stop before bundle swap" >> {tmp_dir}/rustdesk_root_update.log
+    echo "[root-update] GerarDesk GUI process did not stop before bundle swap" >> {tmp_dir}/rustdesk_root_update.log
     exit 1
 fi
 staged_bundle="{tmp_dir}/staged.app"
@@ -2105,7 +2105,7 @@ mod update_tests {
             std::process::id(),
             hbb_common::rand::random::<u64>()
         ));
-        let app_dir = test_dir.join("RustDesk.app");
+        let app_dir = test_dir.join("GerarDesk.app");
         let frameworks_dir = app_dir.join("Contents/Frameworks");
         let external_framework = test_dir.join("External.framework");
         std::fs::create_dir_all(&frameworks_dir).unwrap();
@@ -2129,12 +2129,12 @@ mod update_tests {
             std::process::id(),
             hbb_common::rand::random::<u64>()
         ));
-        let framework_dir = test_dir.join("RustDesk.app/Contents/Frameworks/Test.framework");
+        let framework_dir = test_dir.join("GerarDesk.app/Contents/Frameworks/Test.framework");
         let versions_dir = framework_dir.join("Versions");
         std::fs::create_dir_all(versions_dir.join("A")).unwrap();
         std::os::unix::fs::symlink("A", versions_dir.join("Current")).unwrap();
 
-        let result = validate_update_tree(&test_dir.join("RustDesk.app"), None);
+        let result = validate_update_tree(&test_dir.join("GerarDesk.app"), None);
 
         std::fs::remove_dir_all(test_dir).unwrap();
         assert!(result.is_ok());
