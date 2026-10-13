@@ -528,6 +528,33 @@ impl Client {
             None
         };
         let has_webrtc_offerer = webrtc_offerer.is_some();
+        // A peer is registered on exactly one of the configured rendezvous servers. Race one
+        // attempt per server so the one that has it online wins; the others fail fast with the
+        // server's own "offline" response and never delay the winner.
+        let mut other_futures = Vec::new();
+        for server in servers.iter() {
+            let server = check_port(server, RENDEZVOUS_PORT);
+            if server == rendezvous_server {
+                continue;
+            }
+            other_futures.push(
+                Self::_start_inner(
+                    peer.to_owned(),
+                    key.to_owned(),
+                    token.to_owned(),
+                    conn_type,
+                    interface.clone(),
+                    (None, None),
+                    None,
+                    None,
+                    None,
+                    server,
+                    Vec::new(),
+                    contained,
+                )
+                .boxed(),
+            );
+        }
         let fut = Self::_start_inner(
             peer.to_owned(),
             key.to_owned(),
@@ -539,7 +566,7 @@ impl Client {
             ipv6,
             webrtc_offerer,
             rendezvous_server.clone(),
-            servers.clone(),
+            Vec::new(),
             contained,
         );
         // The fallback request exists only to carry a TCP punch, so it is pointless once TCP
@@ -549,38 +576,63 @@ impl Client {
             || (udp.0.is_none() && !has_webrtc_offerer)
             || !tcp_punch_allowed()
         {
-            return fut.await;
+            let mut connect_futures = vec![fut.boxed()];
+            connect_futures.extend(other_futures);
+            return match select_ok(connect_futures).await {
+                Ok(conn) => Ok((conn.0 .0, conn.0 .1, conn.0 .2)),
+                Err(e) => Err(e),
+            };
         }
-        let preferred_fut = fut.boxed();
-        // This is deliberately a pure TCP punch request: its WebRTC argument must stay `None`.
-        // TCP punching closes the rendezvous socket before binding a new connection to the same
-        // local address; a WebRTC ICE bridge would retain that socket and break the port reuse.
-        // The preferred request retains its own socket for WebRTC signaling.
-        let fallback_fut = Self::_start_inner(
-            peer.to_owned(),
-            key.to_owned(),
-            token.to_owned(),
-            conn_type,
-            interface,
-            (None, None),
-            None,
-            None,
-            None,
-            rendezvous_server,
-            servers,
-            contained,
-        )
-        .boxed();
         if has_webrtc_offerer {
+            // The TCP punch request is deliberately pure TCP: its WebRTC argument must stay
+            // `None`. TCP punching closes the rendezvous socket before binding a new connection
+            // to the same local address; a WebRTC ICE bridge would retain that socket and break
+            // the port reuse. The preferred request keeps its own socket for WebRTC signaling.
+            let mut fallback_futures = vec![
+                Self::_start_inner(
+                    peer.to_owned(),
+                    key.to_owned(),
+                    token.to_owned(),
+                    conn_type,
+                    interface,
+                    (None, None),
+                    None,
+                    None,
+                    None,
+                    rendezvous_server.clone(),
+                    Vec::new(),
+                    contained,
+                )
+                .boxed(),
+            ];
+            fallback_futures.extend(other_futures);
             return race_transports_prefer_webrtc(
-                preferred_fut,
-                vec![fallback_fut],
+                fut.boxed(),
+                fallback_futures,
                 Self::relay_fallback_delay_ms(),
                 |result| result.0 .1,
             )
             .await;
         }
-        let connect_futures = vec![preferred_fut, fallback_fut];
+        let mut connect_futures = vec![fut.boxed()];
+        connect_futures.extend(other_futures);
+        connect_futures.push(
+            Self::_start_inner(
+                peer.to_owned(),
+                key.to_owned(),
+                token.to_owned(),
+                conn_type,
+                interface,
+                (None, None),
+                None,
+                None,
+                None,
+                rendezvous_server,
+                Vec::new(),
+                contained,
+            )
+            .boxed(),
+        );
         match select_ok(connect_futures).await {
             Ok(conn) => Ok((conn.0 .0, conn.0 .1, conn.0 .2)),
             Err(e) => Err(e),
