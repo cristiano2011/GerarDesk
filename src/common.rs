@@ -3290,7 +3290,7 @@ mod tests {
         assert!(is_public("https://rustdesk.com/"));
         assert!(is_public("https://www.rustdesk.com/"));
         assert!(is_public("https://api.rustdesk.com/v1"));
-        assert!(is_public("https://API.GERARDESK.COM/v1"));
+        assert!(is_public("https://API.RUSTDESK.COM/v1"));
         assert!(is_public("https://rustdesk.com/path"));
 
         // Test URLs ending with "rustdesk.com"
