@@ -16,7 +16,7 @@ import 'package:flutter_hbb/models/platform_model.dart';
 import 'package:flutter_hbb/models/shortcut_model.dart';
 import 'package:uuid/uuid.dart';
 
-class _ChatBinding extends Fake implements GerardeskImpl {
+class _ChatBinding extends Fake implements RustdeskImpl {
   final sent = <(SessionID, String)>[];
   final cmSent = <(int, String)>[];
 
