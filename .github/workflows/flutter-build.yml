@@ -2716,6 +2716,8 @@ jobs:
           ./build-apprun.sh ${{ matrix.job.arch }}
           sudo appimage-builder --skip-tests --recipe ./AppImageBuilder-${{ matrix.job.arch }}.yml
           cmp AppDir/AppRun appimage-build/AppRun/v2.0.0/AppRun-Release-${{ matrix.job.arch }}
+          # appimage-builder names the file from app_info.name (GerarDesk); standardize the asset name.
+          mv GerarDesk-${{ env.VERSION }}-*.AppImage gerardesk-${{ env.VERSION }}-${{ matrix.job.arch }}.AppImage
 
       - name: Publish appimage package
         if: env.UPLOAD_ARTIFACT == 'true'
