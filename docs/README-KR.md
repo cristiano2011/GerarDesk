@@ -151,7 +151,7 @@ target/debug/rustdesk
 또는 릴리스 실행 파일을 실행하는 경우:
 
 ```sh
-target/release/rustdesk
+target/release/gerardesk
 ```
 
 RustDesk 리포지토리의 루트에서 이러한 명령을 실행하고 있는지 확인하세요. 그렇지 않으면 응용 프로그램이 필요한 리소스를 찾지 못할 수 있습니다. 또한 `install` 또는 `run` 과 같은 다른 cargo 하위 명령은 호스트가 아닌 컨테이너 내부에 프로그램을 설치하거나 실행하므로 현재 이 방법을 통해 지원되지 않는다는 점에 유의하세요.

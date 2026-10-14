@@ -132,7 +132,7 @@ target/debug/rustdesk
 Nếu bạn đang chạy bản build được tối ưu hóa, thì bạn có thể chạy với lệnh:
 
 ```sh
-target/release/rustdesk
+target/release/gerardesk
 ```
 
 Hãy đảm bảo rằng bạn đang chạy các lệnh này từ gốc của thư mục **RustDesk**, nếu không, ứng dụng có thể không thể tìm thấy các tệp tài nguyên cần thiết. Hãy lưu ý rằng các câu lệnh con khác của **cargo** như **install** hoặc **run** hiện không được hỗ trợ qua phương pháp này, vì chúng sẽ cài đặt hoặc chạy chương trình bên trong **container** thay vì trên máy tính của bạn.

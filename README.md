@@ -151,7 +151,7 @@ target/debug/rustdesk
 Or, if you're running a release executable:
 
 ```sh
-target/release/rustdesk
+target/release/gerardesk
 ```
 
 Please ensure that you run these commands from the root of the RustDesk repository, or the application may not find the required resources. Also note that other cargo subcommands such as `install` or `run` are not currently supported via this method as they would install or run the program inside the container instead of the host.

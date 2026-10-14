@@ -201,7 +201,7 @@ target/debug/rustdesk
 或者您想运行发行 (Release) 版本:
 
 ```sh
-target/release/rustdesk
+target/release/gerardesk
 ```
 
 请注意：

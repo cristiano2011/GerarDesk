@@ -140,7 +140,7 @@ target/debug/rustdesk
 :أو في حال قمت ببناء إصدار محسن
 
 ```sh
-target/release/rustdesk
+target/release/gerardesk
 ```
 
 RustDesk يرجى التأكد من أنك تنفذ هذه الأوامر من جذر مستودع

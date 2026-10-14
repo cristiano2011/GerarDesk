@@ -149,7 +149,7 @@ target/debug/rustdesk
 Veya, yayım çalıştırılabilir dosyası için:
 
 ```sh
-target/release/rustdesk
+target/release/gerardesk
 ```
 
 Lütfen bu komutları RustDesk reposunun root klasöründe çalıştırdığınızdan emin olun, aksi takdirde uygulama gereken kaynakları bulamayabilir. Ayrıca, `install` veya `run` gibi diğer cargo altkomutları şu anda bu yöntem aracılığıyla desteklenmemektedir, çünkü bunlar programı konteyner içinde kurar veya çalıştırır, ana makinede değil.

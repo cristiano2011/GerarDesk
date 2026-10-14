@@ -121,7 +121,7 @@ target/debug/rustdesk
 Tai, jos olet suorittamassa jakeluversion suoritettavaa tiedostoa:
 
 ```sh
-target/release/rustdesk
+target/release/gerardesk
 ```
 
 Varmista, että suoritat näitä komentoja RustDesktop-tietovaraston juurihakemistossa, muutoin sovellus ei ehkä löydä vaadittuja resursseja. Huomaa myös, että muita cargo-alikomentoja kuten `install` tai `run` ei nykyisin tueta tässä menetelmässä, koska ne asentavat tai suorittavat ohjelman säiliön sisällä eikä isäntäohjelman sisällä.

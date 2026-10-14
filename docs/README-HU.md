@@ -133,7 +133,7 @@ target/debug/rustdesk
 Vagy ha release binary, akkor:
 
 ```sh
-target/release/rustdesk
+target/release/gerardesk
 ```
 
 Kérlek mindenképpen nézd meg hogy ezeket a parancsokat a root RustDesk mappában futtatod e, különben a RustDesk lehet hogy nem fogja megtalálni az építéshez szükséges elemeket. Fontos az is, hogy jelenleg más cargo subparancsok, például `install`vagy `run` nem támogatottak, mivel egy Dockeres építés esetén elindítanák a programot a containeren belül.

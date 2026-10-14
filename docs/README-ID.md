@@ -139,7 +139,7 @@ target/debug/rustdesk
 Atau, jika kamu menjalankan rilis yang dapat dieksekusi:
 
 ```sh
-target/release/rustdesk
+target/release/gerardesk
 ```
 
 Harap pastikan bahwa kamu menjalankan perintah ini dari repositori root RustDesk, jika tidak demikian, aplikasi mungkin tidak dapat menemukan sumber yang diperlukan. Dan juga, perintah cargo seperti `install` atau `run` saat ini tidak didukung melalui metode ini karena, proses menginstal atau menjalankan program terjadi di dalam container bukan pada host.

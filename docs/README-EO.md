@@ -121,7 +121,7 @@ target/debug/rustdesk
 Aŭ, se vi plenumas eldonan plenumeblan dosieron:
 
 ```sh
-target/release/rustdesk
+target/release/gerardesk
 ```
 
 Bonvolu certigi, ke vi plenumas tiujn komandojn el la radiko de la deponejo RustDesk, alie la programo povus esti nekapabla de trovi la devigajn resursojn. Ankaŭ notu, ke la aliaj subkomandoj de cargo kiel `install` aŭ `run` momente ne estas subtenitaj per tiu metodo, ĉar instalus aŭ plenumus la programon en la kontenero anstataŭ de la gastiganto.

@@ -151,7 +151,7 @@ target/debug/rustdesk
 Sau, dacă rulezi un executabil release:
 
 ```sh
-target/release/rustdesk
+target/release/gerardesk
 ```
 
 Asigură-te că rulezi aceste comenzi din rădăcina repository-ului RustDesk, altfel aplicația poate să nu găsească resursele necesare. De asemenea, reține că alte subcomenzi cargo, cum ar fi `install` sau `run`, nu sunt acceptate în prezent prin această metodă, deoarece ar instala sau rula programul în interiorul containerului în loc de gazdă.

@@ -151,7 +151,7 @@ target/debug/rustdesk
 Oder, wenn Sie eine Releaseversion benutzen:
 
 ```sh
-target/release/rustdesk
+target/release/gerardesk
 ```
 
 Bitte stellen Sie sicher, dass Sie diese Befehle im Stammverzeichnis des RustDesk-Repositorys nutzen. Ansonsten kann es passieren, dass das Programm die Ressourcen nicht finden kann. Bitte bedenken Sie auch, dass andere Cargo-Unterbefehle wie `install` oder `run` aktuell noch nicht unterstützt werden, da sie das Programm innerhalb des Containers starten oder installieren würden, anstatt auf Ihrem eigentlichen System.

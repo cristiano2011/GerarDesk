@@ -139,7 +139,7 @@ target/debug/rustdesk
 Lub jeśli uruchamiasz plik wykonywalny wersji:
 
 ```sh
-target/release/rustdesk
+target/release/gerardesk
 ```
 
 Upewnij się, że uruchamiasz te polecenia z katalogu głównego repozytorium RustDesk, w przeciwnym razie aplikacja może nie być w stanie znaleźć wymaganych zasobów. Należy również pamiętać, że inne podpolecenia ładowania, takie jak `install` lub `run` nie są obecnie obsługiwane za pomocą tej metody, ponieważ instalowałyby lub uruchamiały program wewnątrz kontenera zamiast na hoście.

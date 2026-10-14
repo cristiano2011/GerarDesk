@@ -5,10 +5,10 @@ cargo install flutter_rust_bridge_codegen --version 1.80.1 --features uuid --loc
 cd flutter; flutter pub get; cd -
 ~/.cargo/bin/flutter_rust_bridge_codegen --rust-input ./src/flutter_ffi.rs --dart-output ./flutter/lib/generated_bridge.dart --c-output ./flutter/macos/Runner/bridge_generated.h
 ./build.py --flutter
-rm rustdesk-$VERSION.dmg
+rm gerardesk-$VERSION.dmg
 # security find-identity -v
 codesign --force --options runtime -s $MACOS_CODESIGN_IDENTITY --deep --strict ./flutter/build/macos/Build/Products/Release/GerarDesk.app -vvv
-create-dmg --icon "GerarDesk.app" 200 190 --hide-extension "GerarDesk.app" --window-size 800 400 --app-drop-link 600 185 rustdesk-$VERSION.dmg ./flutter/build/macos/Build/Products/Release/GerarDesk.app
-codesign --force --options runtime -s $MACOS_CODESIGN_IDENTITY --deep --strict rustdesk-$VERSION.dmg -vvv
-# notarize the rustdesk-${{ env.VERSION }}.dmg
-rcodesign notary-submit --api-key-path ~/.p12/api-key.json  --staple rustdesk-$VERSION.dmg
+create-dmg --icon "GerarDesk.app" 200 190 --hide-extension "GerarDesk.app" --window-size 800 400 --app-drop-link 600 185 gerardesk-$VERSION.dmg ./flutter/build/macos/Build/Products/Release/GerarDesk.app
+codesign --force --options runtime -s $MACOS_CODESIGN_IDENTITY --deep --strict gerardesk-$VERSION.dmg -vvv
+# notarize the gerardesk-${{ env.VERSION }}.dmg
+rcodesign notary-submit --api-key-path ~/.p12/api-key.json  --staple gerardesk-$VERSION.dmg

@@ -2,10 +2,10 @@
 Name=GerarDesk
 NoDisplay=true
 MimeType=x-scheme-handler/gerardesk;
-TryExec=rustdesk
-Exec=rustdesk %u
-Icon=rustdesk
+TryExec=gerardesk
+Exec=gerardesk %u
+Icon=gerardesk
 Terminal=false
 Type=Application
 StartupNotify=false
-StartupWMClass=rustdesk
+StartupWMClass=gerardesk

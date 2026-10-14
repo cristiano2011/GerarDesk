@@ -141,7 +141,7 @@ target/debug/rustdesk
 Als je een release-versie hebt gebouwd, is het commando als volgt:
 
 ```sh
-target/release/rustdesk
+target/release/gerardesk
 ```
 
 Zorg ervoor dat je deze commando's van de root van de RustDesk-repository uitvoert, anders kan het programma de nodige afhankelijkheden mogelijk niet vinden. Let ook op dat andere cargo-subcommando's zoals `install` en `run` zijn momenteel niet ondersteund, aangezien deze zouden worden uitgevoerd in een container in plaats van op de host.

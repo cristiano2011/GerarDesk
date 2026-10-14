@@ -1,10 +1,12 @@
-Name:       rustdesk
+Name:       gerardesk
 Version:    1.1.9
 Release:    0
 Summary:    RPM package
 License:    GPL-3.0
 Requires:   gtk3 libxcb1 libXfixes3 alsa-utils libXtst6 libva2 gstreamer-plugins-base gstreamer-plugin-pipewire
 Recommends: libayatana-appindicator3-1 xdotool
+Conflicts: rustdesk
+Obsoletes: rustdesk
 
 # https://docs.fedoraproject.org/en-US/packaging-guidelines/Scriptlets/
 
@@ -21,26 +23,26 @@ The best open-source remote desktop client software, written in Rust.
 
 %install
 mkdir -p %{buildroot}/usr/bin/
-mkdir -p %{buildroot}/usr/share/rustdesk/
-mkdir -p %{buildroot}/usr/share/rustdesk/files/
+mkdir -p %{buildroot}/usr/share/gerardesk/
+mkdir -p %{buildroot}/usr/share/gerardesk/files/
 mkdir -p %{buildroot}/usr/share/icons/hicolor/256x256/apps/
 mkdir -p %{buildroot}/usr/share/icons/hicolor/scalable/apps/
-install -m 755 $HBB/target/release/rustdesk %{buildroot}/usr/bin/rustdesk
-install $HBB/libsciter-gtk.so %{buildroot}/usr/share/rustdesk/libsciter-gtk.so
-install $HBB/res/rustdesk.service %{buildroot}/usr/share/rustdesk/files/
-install $HBB/res/128x128@2x.png %{buildroot}/usr/share/icons/hicolor/256x256/apps/rustdesk.png
-install $HBB/res/scalable.svg %{buildroot}/usr/share/icons/hicolor/scalable/apps/rustdesk.svg
-install $HBB/res/rustdesk.desktop %{buildroot}/usr/share/rustdesk/files/
-install $HBB/res/rustdesk-link.desktop %{buildroot}/usr/share/rustdesk/files/
+install -m 755 $HBB/target/release/gerardesk %{buildroot}/usr/bin/gerardesk
+install $HBB/libsciter-gtk.so %{buildroot}/usr/share/gerardesk/libsciter-gtk.so
+install $HBB/res/gerardesk.service %{buildroot}/usr/share/gerardesk/files/
+install $HBB/res/128x128@2x.png %{buildroot}/usr/share/icons/hicolor/256x256/apps/gerardesk.png
+install $HBB/res/scalable.svg %{buildroot}/usr/share/icons/hicolor/scalable/apps/gerardesk.svg
+install $HBB/res/gerardesk.desktop %{buildroot}/usr/share/gerardesk/files/
+install $HBB/res/gerardesk-link.desktop %{buildroot}/usr/share/gerardesk/files/
 
 %files
-/usr/bin/rustdesk
-/usr/share/rustdesk/libsciter-gtk.so
-/usr/share/rustdesk/files/rustdesk.service
-/usr/share/icons/hicolor/256x256/apps/rustdesk.png
-/usr/share/icons/hicolor/scalable/apps/rustdesk.svg
-/usr/share/rustdesk/files/rustdesk.desktop
-/usr/share/rustdesk/files/rustdesk-link.desktop
+/usr/bin/gerardesk
+/usr/share/gerardesk/libsciter-gtk.so
+/usr/share/gerardesk/files/gerardesk.service
+/usr/share/icons/hicolor/256x256/apps/gerardesk.png
+/usr/share/icons/hicolor/scalable/apps/gerardesk.svg
+/usr/share/gerardesk/files/gerardesk.desktop
+/usr/share/gerardesk/files/gerardesk-link.desktop
 
 %changelog
 # let's skip this for now
@@ -53,26 +55,26 @@ case "$1" in
   ;;
   2)
     # for upgrade
-    systemctl stop rustdesk || true
+    systemctl stop gerardesk || true
   ;;
 esac
 
 %post
-cp /usr/share/rustdesk/files/rustdesk.service /etc/systemd/system/rustdesk.service
-cp /usr/share/rustdesk/files/rustdesk.desktop /usr/share/applications/
-cp /usr/share/rustdesk/files/rustdesk-link.desktop /usr/share/applications/
+cp /usr/share/gerardesk/files/gerardesk.service /etc/systemd/system/gerardesk.service
+cp /usr/share/gerardesk/files/gerardesk.desktop /usr/share/applications/
+cp /usr/share/gerardesk/files/gerardesk-link.desktop /usr/share/applications/
 systemctl daemon-reload
-systemctl enable rustdesk
-systemctl start rustdesk
+systemctl enable gerardesk
+systemctl start gerardesk
 update-desktop-database
 
 %preun
 case "$1" in
   0)
     # for uninstall
-    systemctl stop rustdesk || true
-    systemctl disable rustdesk || true
-    rm /etc/systemd/system/rustdesk.service || true
+    systemctl stop gerardesk || true
+    systemctl disable gerardesk || true
+    rm /etc/systemd/system/gerardesk.service || true
   ;;
   1)
     # for upgrade
@@ -83,8 +85,8 @@ esac
 case "$1" in
   0)
     # for uninstall
-    rm /usr/share/applications/rustdesk.desktop || true
-    rm /usr/share/applications/rustdesk-link.desktop || true
+    rm /usr/share/applications/gerardesk.desktop || true
+    rm /usr/share/applications/gerardesk-link.desktop || true
     update-desktop-database
   ;;
   1)

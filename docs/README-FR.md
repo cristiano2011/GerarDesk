@@ -121,7 +121,7 @@ target/debug/rustdesk
 Ou, si vous exécutez un exécutable provenant d'une release :
 
 ```sh
-target/release/rustdesk
+target/release/gerardesk
 ```
 
 Veuillez vous assurer que vous exécutez ces commandes à partir de la racine du dépôt RustDesk, sinon l'application ne pourra pas trouver les ressources requises. Notez également que les autres sous-commandes de cargo telles que `install` ou `run` ne sont pas actuellement supportées par cette méthode car elles installeraient ou exécuteraient le programme à l'intérieur du conteneur au lieu de l'hôte.

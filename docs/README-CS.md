@@ -128,7 +128,7 @@ target/debug/rustdesk
 Nebo, pokud spouštíte variantu pro vydání:
 
 ```sh
-target/release/rustdesk
+target/release/gerardesk
 ```
 
 Ujistěte se, že tyto příkazy spouštíte z kořenového adresáře RustDesk, jinak aplikace nemusí být schopná nalézt potřebné prostředky (resources). Také si všimněte, že ostatní dílčí príkazy nástroje cargo, jako třeba `install` nebo `run` zatím nejsou prostřednictvím této metody podporovány, protože by vedly k instalaci či spuštění program uvnitř kontejneru namísto přímo v systému.

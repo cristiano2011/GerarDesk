@@ -5,12 +5,17 @@ authors = ["rustdesk <info@rustdesk.com>"]
 edition = "2021"
 build= "build.rs"
 description = "GerarDesk Remote Desktop"
-default-run = "rustdesk"
+default-run = "gerardesk"
+autobins = false
 rust-version = "1.75"
 
 [lib]
 name = "librustdesk"
 crate-type = ["cdylib", "staticlib", "rlib"]
+
+[[bin]]
+name = "gerardesk"
+path = "src/main.rs"
 
 [[bin]]
 name = "naming"
@@ -256,10 +261,10 @@ webrtc-util = { git = "https://github.com/rustdesk-org/webrtc", rev = "49c89bd8d
 webrtc-sctp = { git = "https://github.com/rustdesk-org/webrtc", rev = "49c89bd8d30e6e62e4c1a96cee38fdc11f79ef63" }
 
 [package.metadata.winres]
-LegalCopyright = "Copyright © 2026 Purslane Tech Pte. Ltd. All rights reserved."
+LegalCopyright = "Copyright © 2026 GerarDesk. All rights reserved."
 ProductName = "GerarDesk"
 FileDescription = "GerarDesk Remote Desktop"
-OriginalFilename = "rustdesk.exe"
+OriginalFilename = "gerardesk.exe"
 
 [target.'cfg(target_os="windows")'.build-dependencies]
 winres = "0.1"

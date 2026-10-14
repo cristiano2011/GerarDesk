@@ -148,7 +148,7 @@ target/debug/rustdesk
 リリースビルドを起動する場合:
 
 ```sh
-target/release/rustdesk
+target/release/gerardesk
 ```
 
 コマンドをRustDeskリポジトリのルートから実行していることを確認してください。また、`install` や `run` などの他のcargoサブコマンドは、ホストではなくコンテナ内でプログラムをインストール、実行するため、現在の方法ではサポートされていません。

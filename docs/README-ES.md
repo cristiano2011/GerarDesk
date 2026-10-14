@@ -147,7 +147,7 @@ target/debug/rustdesk
 O si estas ejecutando una versión para su publicación:
 
 ```sh
-target/release/rustdesk
+target/release/gerardesk
 ```
 
 Por favor, asegurate de que estás ejecutando estos comandos desde la raíz del repositorio de RustDesk, de lo contrario la aplicación puede ser incapaz de encontrar los recursos necesarios. También ten en cuenta que otros subcomandos de cargo como `install` o `run` no estan actualmente soportados usando este metodo, ya que instalarían o ejecutarían el programa dentro del contenedor en lugar del host.

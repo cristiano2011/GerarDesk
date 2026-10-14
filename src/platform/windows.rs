@@ -3583,7 +3583,7 @@ reg add {subkey} /f /v EstimatedSize /t REG_DWORD /d {size}
     // md \"{path}\"
     //
     // We need `taskkill` because:
-    // 1. There may be some other processes like `rustdesk --connect` are running.
+    // 1. There may be some other processes like `gerardesk --connect` are running.
     // 2. Sometimes, the main window and the tray icon are showing
     // while I cannot find them by `tasklist` or the methods above.
     // There's should be 4 processes running: service, server, tray and main window.

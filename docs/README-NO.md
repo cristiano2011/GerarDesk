@@ -146,7 +146,7 @@ target/debug/rustdesk
 Eller, hvis du kjører ett release program:
 
 ```sh
-target/release/rustdesk
+target/release/gerardesk
 ```
 
 Venligst pass på att du kjører disse kommandoene fra roten av RustDesk repositoret, eller kan det hende att applikasjon ikke finner de riktige ressursene. Pass også på att andre cargo subkommandoer som for eksempel `install` eller `run` ikke støttes med denne metoden da de vill installere eller kjøre programmet i konteineren istedet for verten.

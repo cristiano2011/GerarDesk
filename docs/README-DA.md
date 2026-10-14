@@ -122,7 +122,7 @@ target/debug/rustdesk
 Eller, hvis du kører en udgivelses eksekverbar:
 
 ```sh
-target/release/rustdesk
+target/release/gerardesk
 ```
 
 Sørg for, at du kører disse kommandoer fra roden af RustDesk-lageret, ellers kan applikationen muligvis ikke finde de nødvendige ressourcer. Bemærk også, at andre cargo underkommandoer såsom 'install' eller 'run' i øjeblikket ikke understøttes via denne metode, da de ville installere eller køre programmet inde i containeren i stedet for værten.
