@@ -708,7 +708,7 @@ pub fn core_main() -> Option<CoreMainAction> {
             }
             return None;
         } else if args[0] == "-gtk-sudo" {
-            // rustdesk service kill `gerardesk --` processes
+            // gerardesk service kill `gerardesk --` processes
             #[cfg(target_os = "linux")]
             if args.len() > 2 {
                 crate::platform::gtk_sudo::exec();
