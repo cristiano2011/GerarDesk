@@ -170,7 +170,6 @@ pub static ref T: std::collections::HashMap<&'static str, &'static str> =
         ("Local Port", "Ghenna locale"),
         ("Local Address", "Indiritzu locale"),
         ("Change Local Port", "Càmbia ghenna locale"),
-        ("setup_server_tip", "Pro una connessione prus lestra, cunfigura unu serbidore ispetzìficu"),
         ("Too short, at least 6 characters.", "Tropu curtza, a su nessi 6 caràteres"),
         ("The confirmation is not identical.", "Sa crae de cunfirma non currispondet"),
         ("Permissions", "Permissos"),

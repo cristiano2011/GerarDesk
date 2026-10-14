@@ -170,7 +170,6 @@ pub static ref T: std::collections::HashMap<&'static str, &'static str> =
         ("Local Port", "Lokaler Port"),
         ("Local Address", "Lokale Adresse"),
         ("Change Local Port", "Lokalen Port ändern"),
-        ("setup_server_tip", "für eine schnellere Verbindung richten Sie bitte Ihren eigenen Server ein."),
         ("Too short, at least 6 characters.", "Zu kurz, mindestens 6 Zeichen."),
         ("The confirmation is not identical.", "Die Passwörter stimmen nicht überein."),
         ("Permissions", "Berechtigungen"),

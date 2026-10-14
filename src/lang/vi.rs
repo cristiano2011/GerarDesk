@@ -170,7 +170,6 @@ pub static ref T: std::collections::HashMap<&'static str, &'static str> =
         ("Local Port", "Cổng nội bộ"),
         ("Local Address", "Địa chỉ nội bộ"),
         ("Change Local Port", "Đổi cổng nội bộ"),
-        ("setup_server_tip", "Để kết nối nhanh hơn, hãy tự thiết lập máy chủ riêng"),
         ("Too short, at least 6 characters.", "Quá ngắn, cần ít nhất 6 ký tự."),
         ("The confirmation is not identical.", "Mật khẩu xác nhận không khớp"),
         ("Permissions", "Quyền"),

@@ -170,7 +170,6 @@ pub static ref T: std::collections::HashMap<&'static str, &'static str> =
         ("Local Port", "Vietējais ports"),
         ("Local Address", "Vietējā adrese"),
         ("Change Local Port", "Mainīt vietējo portu"),
-        ("setup_server_tip", "Lai iegūtu ātrāku savienojumu, lūdzu, iestatiet savu serveri"),
         ("Too short, at least 6 characters.", "Pārāk īss, vismaz 6 rakstzīmes."),
         ("The confirmation is not identical.", "Apstiprinājums nav identisks."),
         ("Permissions", "Atļaujas"),

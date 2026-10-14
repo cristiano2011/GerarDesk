@@ -170,7 +170,6 @@ pub static ref T: std::collections::HashMap<&'static str, &'static str> =
         ("Local Port", "Paikallinen portti"),
         ("Local Address", "Paikallinen osoite"),
         ("Change Local Port", "Vaihda paikallinen porttia"),
-        ("setup_server_tip", "Nopeampaa yhteyttä varten voit asettaa oman palvelimen"),
         ("Too short, at least 6 characters.", "Liian lyhyt, vähintään 6 merkkiä."),
         ("The confirmation is not identical.", "Vahvistus ei täsmää."),
         ("Permissions", "Oikeudet"),

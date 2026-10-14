@@ -170,7 +170,6 @@ pub static ref T: std::collections::HashMap<&'static str, &'static str> =
         ("Local Port", "Helyi port"),
         ("Local Address", "Helyi cím"),
         ("Change Local Port", "Helyi port módosítása"),
-        ("setup_server_tip", "Gyorsabb kapcsolat érdekében, hozzon létre saját kiszolgálót"),
         ("Too short, at least 6 characters.", "Túl rövid, legalább 6 karakter."),
         ("The confirmation is not identical.", "A megerősítés nem volt azonos"),
         ("Permissions", "Engedélyek"),
